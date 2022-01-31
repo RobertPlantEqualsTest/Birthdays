@@ -1,0 +1,14 @@
+{
+  "name": "birthdays",
+  "version": "1.0.0",
+  "description": "Send birthday congratulations",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Robert Plant",
+  "license": "ISC"
+}
