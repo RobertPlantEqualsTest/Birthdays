@@ -1,4 +1,7 @@
+require("dotenv").config();
+
 const { getBirthdays } = require("./lib/data");
+const { inform } = require("./lib/messages");
 const dayjs = require("dayjs");
 
 const today = dayjs(process.argv[2]);
@@ -13,7 +16,12 @@ const month = today.month();
   );
 
   if (birthdayToday) {
-    // await Promise.all(birthdayToday.map(inform));
+    let isMultiple = birthdayToday.length > 1;
+    console.log(
+      `Found ${birthdayToday.length} birthday${isMultiple ? "s" : ""} today`
+    );
+
+    await Promise.all(birthdayToday.map((birthday) => inform(birthday)));
   } else {
     console.log("Nobody has a birthday today");
   }
