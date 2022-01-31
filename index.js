@@ -10,15 +10,20 @@ const month = today.month();
 
 (async () => {
   const birthdays = await getBirthdays();
-  const birthdayToday = birthdays.filter(
-    ({ date_of_birth }) =>
-      date_of_birth.date() == dayOfMonth && date_of_birth.month() == month
-  );
+  const birthdayToday = birthdays.filter(({ date_of_birth }) => {
+    const birthdayLandsOnLeapYearDay =
+      date_of_birth.date() == 29 && date_of_birth.month() == 1;
+    const daysMatch =
+      (birthdayLandsOnLeapYearDay && 28 == dayOfMonth) ||
+      date_of_birth.date() == dayOfMonth;
+
+    return daysMatch && date_of_birth.month() == month;
+  });
 
   if (birthdayToday) {
-    let isMultiple = birthdayToday.length > 1;
+    let isSingular = birthdayToday.length == 1;
     console.log(
-      `Found ${birthdayToday.length} birthday${isMultiple ? "s" : ""} today`
+      `Found ${birthdayToday.length} birthday${isSingular ? "" : "s"} today`
     );
 
     await Promise.all(birthdayToday.map((birthday) => inform(birthday)));
