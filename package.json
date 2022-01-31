@@ -10,5 +10,8 @@
     "test": "jest"
   },
   "author": "Robert Plant",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.10.7"
+  }
 }
