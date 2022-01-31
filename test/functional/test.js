@@ -37,4 +37,19 @@ describe("Check birthdays", () => {
       })
     );
   });
+
+  it("should mail two people if they are both found", async () => {
+    await checkBirthdays("2000/09/11");
+
+    expect(sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        to: "Mary Ann <mary.ann@foobar.com>",
+      })
+    );
+    expect(sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        to: "Mary The Second Ann <mary2.ann@foobar.com>",
+      })
+    );
+  });
 });
